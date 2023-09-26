@@ -1,13 +1,14 @@
 ﻿#include <iostream>
 #include <fstream>
 #include <string>
-#include "Second.cpp"
+#include <algorithm>
+#include "Second.h"
 
 int main(int argc, char** argv)
 {
     const std::string numbers = "0123456789.,";
     std::string filename;
-    std::string data[10];
+    double data[10]{};
     int b = 0;
     if (argc < 2)
     {
@@ -26,11 +27,11 @@ int main(int argc, char** argv)
             {
                 varName = line.substr(0, pos);
                 line.erase(0, pos + delimiter.length());
-                data[b] = varName;
+                data[b] = std::stod(varName);
                 b += 1;
                 continue;
             }
-            data[b] = line;
+            data[b] = std::stod(line);
         }
         else std::cout << "Unable to open file";
 
@@ -45,16 +46,26 @@ int main(int argc, char** argv)
             }
 
         }
+        for (int i = 1; i < argc; i++)
+        {
+            data[i] = atof(argv[i]);
+        }
     }
     else
     {
         for (int i = 0; i <= b; i++)
         {
-            if (data[i].find_first_not_of(numbers) != std::string::npos)
+            if (std::to_string(data[i]).find_first_not_of(numbers) != std::string::npos)
             {
                 std::cout << "Ошибка! Аргументы должны быть числами!";
             }
 
         }
+    }
+    int n = sizeof(data) / sizeof(data[0]);
+    std::sort(data, data + n, comp);
+    for (int i = 0; i < n; i++)
+    {
+        std::cout << data[i] << " ";
     }
 }

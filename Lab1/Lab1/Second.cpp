@@ -1,23 +1,30 @@
+#include <iostream>
 #include <string>
+#include "Second.h"
 
-void avgsum(std::string data)
-{
-    int b = sizeof(data) / sizeof(data[0]);
-    for (int i = 0; i <= b; i++)
-    {
-        i = 4;
-    }
-}
-class gfg {
-public:
-    int getSum(int n)
-    {
-        int sum = 0;
-        while (n != 0) {
-            sum = sum + n % 10;
-            n = n / 10;
+bool comp(const double& a, const double& b) {
+
+    int sumA;
+    int sumB;
+    std::string numStr = std::to_string(a);
+    size_t decimalPos = numStr.find('.');
+
+    if (decimalPos != std::string::npos) {
+        sumA = 0;
+        for (size_t i = decimalPos + 1; i < numStr.length(); ++i) {
+            sumA += numStr[i] - '0';
         }
-        return sum;
     }
-};
-// unfinished code, will finish later.
+
+    numStr = std::to_string(b);
+    decimalPos = numStr.find('.');
+
+    if (decimalPos != std::string::npos) {
+        sumB = 0;
+        for (size_t i = decimalPos + 1; i < numStr.length(); ++i) {
+            sumB += numStr[i] - '0';
+        }
+    }
+
+    return sumA < sumB;
+}

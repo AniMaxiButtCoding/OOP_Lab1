@@ -18,5 +18,13 @@
     <ClCompile Include="Lab1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Second.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Second.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
