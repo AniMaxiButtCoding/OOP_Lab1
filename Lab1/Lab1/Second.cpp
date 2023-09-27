@@ -1,6 +1,10 @@
 #include <iostream>
 #include <string>
-#include "Second.h"
+
+struct mathin {
+    double avg;
+    double havg;
+};
 
 bool comp(const double& a, const double& b) {
 
@@ -27,4 +31,37 @@ bool comp(const double& a, const double& b) {
     }
 
     return sumA < sumB;
+}
+
+mathin means(double arr[], int a)
+{
+    mathin result;
+    int temp[10]{};
+    double n = 0;
+    for (int i = 0; i < a; i++)
+    {
+        temp[i] = arr[i];
+        if (temp[i] != 0)
+        {
+            n++;
+        }
+    }
+    double sum = 0;
+    result.avg = 0;
+    for (int i = 0; i <= n; i++) 
+    {
+        sum += arr[i];
+    }
+    result.avg = sum / n;
+    double harm_mean = 0;
+    for (size_t e = 0; e < n; ++e)
+    {
+        if (arr[e] != 0)
+        {
+            harm_mean += 1.0 / arr[e];
+        }
+    }
+
+    result.havg = n / harm_mean;
+    return result;
 }

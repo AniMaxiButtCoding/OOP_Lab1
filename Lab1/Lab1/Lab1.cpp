@@ -12,7 +12,7 @@ int main(int argc, char** argv)
     int b = 0;
     if (argc < 2)
     {
-        std::cout << "Аргументы не были введены, выберите файл с аргументами:";
+        std::cout << "No arguments were passed, please choose a file with arguments: ";
         std::cin >> filename;
         std::ifstream myfile;
         myfile.open(filename);
@@ -33,7 +33,7 @@ int main(int argc, char** argv)
             }
             data[b] = std::stod(line);
         }
-        else std::cout << "Unable to open file";
+        else std::cout << std::endl << "Unable to open file";
 
     }
     if (argc >= 2)
@@ -42,7 +42,7 @@ int main(int argc, char** argv)
         {
             if (std::string(argv[i]).find_first_not_of(numbers) != std::string::npos)
             {
-                std::cout << "Ошибка! Аргументы должны быть числами!";
+                std::cout << "Error! Arguments must be numbers!";
             }
 
         }
@@ -57,15 +57,30 @@ int main(int argc, char** argv)
         {
             if (std::to_string(data[i]).find_first_not_of(numbers) != std::string::npos)
             {
-                std::cout << "Ошибка! Аргументы должны быть числами!";
+                std::cout << std::endl << "Error! Arguments must be numbers!";
             }
 
         }
     }
     int n = sizeof(data) / sizeof(data[0]);
+    mathin result = means(data, n);
     std::sort(data, data + n, comp);
-    for (int i = 0; i < n; i++)
+    std::cout << std::endl << "Please choose a file to output to: ";
+    std::cin >> filename;
+    std::ofstream myfile;
+    myfile.open(filename);
+    if (myfile.is_open())
     {
-        std::cout << data[i] << " ";
+        myfile << "Sorted parameters: ";
+        for (int i = 0; i < n; i++)
+        {
+            if (data[i] != 0)
+            {
+                myfile << data[i] << " ";
+            }
+        }
+        myfile << std::endl << "Average: " << result.avg;
+        myfile << std::endl << "Harmonic mean: " << result.havg;
     }
+    else std::cout << std::endl << "Unable to open file";
 }
