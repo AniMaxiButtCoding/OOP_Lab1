@@ -36,7 +36,7 @@ bool comp(const double& a, const double& b) {
 mathin means(double arr[], int a)
 {
     mathin result;
-    int temp[10]{};
+    double temp[10]{};
     double n = 0;
     for (int i = 0; i < a; i++)
     {
